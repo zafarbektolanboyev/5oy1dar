@@ -1,133 +1,136 @@
-// 1masala Raqamlar massivini oladigan va Set-dan foydalanib, faqat asl massivdagi noyob qiymatlarni o'z ichiga olgan yangi massivni qaytaradigan funksiyani yozing.
-// function noyob_qiymatlar(massiv) {
-//     let noyoblar = [];
-//     let qator = new Set();
-
-//     for (let i = 0; i < massiv.length; i++) {
-//         if (!qator.has(massiv[i])) {
-//             noyoblar.push(massiv[i]);
-//             qator.add(massiv[i]);
-//         }
-//     }
-
-//     return noyoblar;
+// 1
+// function yagona(number) {
+//     let yagonaSet = new Set(number);
+//     let yagonaArray = Array.from(yagonaSet);
+//     return yagonaArray;
 // }
+// let masala_number = [1, 2, 3, 6, 5, 9, 2, 3, 9];
+// let result = yagona(masala_number);
+// console.log(result);
 
-// // Misol massiv
-// let mas = [1, 2, 3, 4, 5, 2, 3, 6, 7, 8, 1, 9, 10, 5];
-// let natija = noyob_qiymatlar(mas);
-// console.log("Asl massiv:", mas);
-// console.log("Noyob qiymatlar:", natija);
-
-// 2masala Satrni oladigan va Map ob'ektini qaytaradigan funktsiyani yozing, bu erda kalitlar satrdagi noyob belgilar va qiymatlar har bir belgi satrda paydo bo'lish sonidir.
-// function noyob_belgilar_va_qiymatlar_satrda(satr) {
-//     let qator = new Set();
-//     let mapObj = new Map();
-
+// 2
+// function satrniMapgaOlgan(satr) {
+//     let map = new Map();
 //     for (let i = 0; i < satr.length; i++) {
-//         let belgi = satr[i];
-//         if (!qator.has(belgi)) {
-//             let belgi_son = 1;
-//             for (let j = i + 1; j < satr.length; j++) {
-//                 if (satr[j] === belgi) {
-//                     belgi_son++;
-//                 }
-//             }
-//             mapObj.set(belgi, belgi_son);
-//             qator.add(belgi);
+//         let belgi = satr.charAt(i);
+//         if (!map.has(belgi)) {
+//             map.set(belgi, 1);
+//         } else {
+//             let hozirgiQiymat = map.get(belgi);
+//             map.set(belgi, hozirgiQiymat + 1);
 //         }
 //     }
-
-//     return mapObj;
+//     return map;
 // }
 
-// let satr = "salomdunyo";
-// let mapObj = noyob_belgilar_va_qiymatlar_satrda(satr);
-// console.log(mapObj);
+// let testSatr = "HELLO";
+// let mapNatija = satrniMapgaOlgan(testSatr);
+// console.log(mapNatija);
 
-
-// 3masal Massivni qabul qiladigan va agar massivning barcha elementlari yagona boвЂlsa, rost qiymatini qaytaradigan funksiyani yozing, aks holda Set dan foydalaning.
-// function rost_qiymat(massiv) {
+// 3
+// function rostQiymatniTop(massiv) {
 //     if (new Set(massiv).size === 1) {
 //         return massiv[0];
 //     } else {
-//         return new Set(massiv);
-//     }
+//         return false; 
 // }
-// let massiv1 = [5, 5, 5, 5, 5];
-// let massiv2 = [1, 2, 3, 4, 5];
-
-// console.log(rost_qiymat(massiv1));
-// console.log(rost_qiymat(massiv2));
-
-
-// 4masala Ikki massivni dublikatsiz birlashtirish:
-// Ikki massivni oladigan va Set-dan foydalanib ikkala massivning barcha noyob elementlarini o'z ichiga olgan yangi massivni qaytaradigan funksiya yozing.
-// function biriktirish(massiv1, massiv2) {
-//     let qator = new Set([...massiv1, ...massiv2]);
-//     return Array.from(qator);
 // }
+// let testMassiv1 = [5, 5, 5, 5, 5];
+// let testMassiv2 = [1, 2, 3, 4, 5];
 
-// let massiv1 = [1, 2, 3, 4, 5];
-// let massiv2 = [4, 5, 6, 7, 8];
+// console.log(rostQiymatniTop(testMassiv1));
+// console.log(rostQiymatniTop(testMassiv2));
 
-// let yangi_massiv = biriktirish(massiv1, massiv2);
-// console.log(yangi_massiv);
+// 4
+// function birleshtir(massiv1, massiv2) {
+//     let yagonaElementlar = new Set([...massiv1, ...massiv2]);
+//     return Array.from(yagonaElementlar);
+// }
+// let massiv2 = [3, 4, 5, 6, 7];
+// let massiv1 = [1, 5, 3, 4, 5];
+// console.log(massiv1, massiv2);
 
-// 5masala Bir qatordagi so'zlar sonini hisoblash:
-// Satrni oladigan va Map ob'ektini qaytaradigan funktsiyani yozing, bu erda kalitlar satrdagi noyob so'zlar va qiymatlar har bir so'z satrda paydo bo'lish sonidir.
 
-// function noyob_sozlar_va_qiymatlar_satrda(satr) {
+// 5
+// function noyobSozlarSoniniTop(satr) {
 //     let sozlar = satr.split(" ");
-//     let qator = new Set(sozlar);
-//     let mapObj = new Map();
-
-//     for (let soz of qator) {
-//         let paydo_bolish_son = 0;
-//         for (let i = 0; i < sozlar.length; i++) {
-//             if (sozlar[i] === soz) {
-//                 paydo_bolish_son++;
-//             }
+//     let map = new Map();
+//     sozlar.forEach(function(soz) {
+//         if (!map.has(soz)) {
+//             map.set(soz, 1);
+//         } else {
+//             let hozirgiQiymat = map.get(soz);
+//             map.set(soz, hozirgiQiymat + 1);
 //         }
-//         mapObj.set(soz, paydo_bolish_son);
-//     }
-//     return mapObj;
+//     });
+//     let noyobSozlarSon = map.size;
+    
+//     return noyobSozlarSon;
 // }
-// let satr = "salom salom dunyo salom";
-// let mapObj = noyob_sozlar_va_qiymatlar_satrda(satr);
-// console.log(mapObj);
+// let testSatr = "bugun bugun kelgan bugun";
+// console.log(noyobSozlarSoniniTop(testSatr)); 
 
-// // 6masala  Massivdan dublikatlarni olib tashlash:
-// Set yordamida massivni oladigan va dublikatsiz yangi massivni qaytaruvchi funksiyani yozing.
-// function dublikatlarniOlibTashlash(arr) {
-//     return [...new Set(arr)];
+// 6
+// function dublikatsiz(massiv) {
+//     let noyobElementlar = new Set(massiv);
+//     return Array.from(noyobElementlar);
 // }
-// let massiv = [1, 2, 3, 4, 5, 1, 2, 3, 6, 7, 8, 9, 9];
-// let yangiMassiv = dublikatlarniOlibTashlash(massiv);
-// console.log(yangiMassiv);
+// let result = [1, 2, 3, 4, 5, 4, 2, 3];
+// console.log(dublikatsiz(result));
 
-// 7masala Subset tekshiruvi:
-// Ikki massivni qabul qiladigan va agar birinchi massiv ikkinchi massivning quyi toвЂplami (ichida) boвЂlsa, rost, aks holda вЂњyolgвЂonвЂќ qiymatini qaytaradigan funksiyani Set dan foydalanib yozing
-// function ichigaTushadi(mi, ma) {
-//     for (let i = 0; i < mi.length; i++) {
-//         if (ma.indexOf(mi[i]) === -1) {
-//             return false;
+// 7
+// function subset(massiv1, massiv2) {
+//     let set1 = new Set(massiv1);
+//     let set2 = new Set(massiv2);
+//     for (var element of set1) {
+//         if (!set2.has(element)) {
+//             return "yolg'on";
 //         }
 //     }
-//     return true;
+//     return "rost";
 // }
-// let birinchiMassiv = [1, 2, 3];
-// let ikkinchiMassiv = [5, 4, 3, 2, 1];
+// let massiv1 = [1, 2, 3];
+// let massiv2 = [1, 2, 3, 4, 5];
+// let massiv3 = [4, 5, 6];
 
-// console.log(ichigaTushadi(birinchiMassiv, ikkinchiMassiv)); 
+// console.log(subset(massiv1, massiv2));
+// console.log(subset(massiv1, massiv3));
 
-// let massivA = [10, 20, 30];
-// let massivB = [1, 2, 3, 10, 20, 30, 40];
 
-// console.log(ichigaTushadi(massivA, massivB));
+// 8
+// function noyobBelgilar(satr1, satr2) {
+//     let set1 = new Set(satr1);
+//     let set2 = new Set(satr2);
+//     let noyobBelgilarSet = new Set([...set1].filter(x => !set2.has(x)));
+//     noyobBelgilarSet = new Set([...noyobBelgilarSet, ...[...set2].filter(x => !set1.has(x))]);
+//     return Array.from(noyobBelgilarSet).join('');
+// }
 
-// // Boshqa misol
-// let massivX = [1, 2, 3];
-// let massivY = [4, 5, 6];
+// let satr1 = "abcdef";
+// let satr2 = "defghij";
+// console.log(noyobBelgilar(satr1, satr2));
 
-// console.log(ichigaTushadi(massivX, massivY));
+
+// 9
+// function qiymatlarYigindisi(raqamliQiymatlar) {
+//     let qiymatlarMap = new Map();
+//     for (let i = 0; i < raqamliQiymatlar.length; i++) {
+//         let qiymat = raqamliQiymatlar[i];
+//         if (!qiymatlarMap.has(qiymat)) {
+//             qiymatlarMap.set(qiymat, 1);
+//         } else {
+//             let hozirgiQiymat = qiymatlarMap.get(qiymat);
+//             qiymatlarMap.set(qiymat, hozirgiQiymat + 1);
+//         }
+//     }
+//     let yigindi = 0;
+//     for (let qiymat of qiymatlarMap.values()) {
+//         yigindi += qiymat;
+//     }
+//     return yigindi;
+// }
+// let raqamliQiymatlar = [1, 2, 3, 4, 5, 1, 2, 3, 4];
+// console.log(qiymatlarYigindisi(raqamliQiymatlar));
+
+// 10
+
